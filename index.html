@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтерактивний тренажер з фінансової грамотності</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        .card-bg {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-slate-100 font-sans pb-12">
+
+    <!-- Header -->
+    <header class="border-b border-slate-700 bg-slate-900/50 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-emerald-400">Практикум: Фінансовий тренажер</h1>
+                <p class="text-xs md:text-sm text-slate-400">Аналіз та класифікація видатків (Максимум: 12 балів)</p>
+            </div>
+            <div class="text-right">
+                <div class="text-xs text-slate-400 uppercase tracking-wider">Підсумок</div>
+                <div class="text-2xl font-black text-amber-400" id="total-score">0 / 12</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-10">
+
+        <!-- Вправа 1 -->
+        <section class="card-bg rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-sky-400">Вправа 1. Видаток чи ні?</h2>
+                    <p class="text-sm text-slate-300 mt-1">Визначте належність кожної ситуації. (Вага: 2 бали)</p>
+                </div>
+                <span class="bg-sky-950 text-sky-300 text-xs font-semibold px-2.5 py-1 rounded border border-sky-800" id="score-ex1">0 / 2 б.</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="ex1-container">
+                <!-- Динамічно заповнюється -->
+            </div>
+        </section>
+
+        <!-- Вправа 2 -->
+        <section class="card-bg rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-sky-400">Вправа 2. Класифікація видатків</h2>
+                    <p class="text-sm text-slate-300 mt-1">Встановіть відповідні категорії для кожної статті. (Вага: 3 бали)</p>
+                </div>
+                <span class="bg-sky-950 text-sky-300 text-xs font-semibold px-2.5 py-1 rounded border border-sky-800" id="score-ex2">0 / 3 б.</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-200">
+                    <thead class="bg-slate-800 text-slate-400 uppercase text-xs">
+                        <tr>
+                            <th class="p-3 rounded-l-lg">Видаток</th>
+                            <th class="p-3">Тип 1</th>
+                            <th class="p-3">Тип 2</th>
+                            <th class="p-3 rounded-r-lg">Тип 3</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ex2-container" class="divide-y divide-slate-700">
+                        <!-- Динамічно заповнюється -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Вправа 3 -->
+        <section class="card-bg rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-sky-400">Вправа 3. Бюджет секретаря Олени</h2>
+                    <p class="text-sm text-slate-300 mt-1">Дохід: 12 000 грн. Проведіть розрахунки. (Вага: 2 бали)</p>
+                </div>
+                <span class="bg-sky-950 text-sky-300 text-xs font-semibold px-2.5 py-1 rounded border border-sky-800" id="score-ex3">0 / 2 б.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                    <h3 class="font-semibold text-slate-300 mb-2">Перелік витрат</h3>
+                    <ul class="text-xs text-slate-400 space-y-1">
+                        <li>• Оренда кімнати: 4 500 грн</li>
+                        <li>• Продукти: 3 200 грн</li>
+                        <li>• Транспорт: 900 грн</li>
+                        <li>• Зв'язок та інтернет: 600 грн</li>
+                        <li>• Канцелярія: 400 грн</li>
+                        <li>• Розваги: 1 200 грн</li>
+                        <li>• Непередбачені: 800 грн</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4 md:col-span-2">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Загальна сума видатків (грн):</label>
+                        <input type="number" id="ex3-total" placeholder="Введіть число" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Стан бюджету:</label>
+                        <select id="ex3-status" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-sky-500">
+                            <option value="">-- Оберіть стан --</option>
+                            <option value="deficit">Дефіцит</option>
+                            <option value="balanced">Дефіциту немає (заощадження / баланс)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Сума дефіциту або заощаджень (грн):</label>
+                        <input type="number" id="ex3-diff" placeholder="Введіть суму залишку/нестачі" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-sky-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вправа 4 -->
+        <section class="card-bg rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-sky-400">Вправа 4. Організація ділової зустрічі</h2>
+                    <p class="text-sm text-slate-300 mt-1">Виділений бюджет: 3 000 грн. (Вага: 2.5 бали)</p>
+                </div>
+                <span class="bg-sky-950 text-sky-300 text-xs font-semibold px-2.5 py-1 rounded border border-sky-800" id="score-ex4">0 / 2.5 б.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                    <h3 class="font-semibold text-slate-300 mb-2">Наявні витрати</h3>
+                    <ul class="text-xs text-slate-400 space-y-1">
+                        <li>1. Кава та вода — 700 грн</li>
+                        <li>2. Канцелярські товари — 450 грн</li>
+                        <li>3. Друк матеріалів — 600 грн</li>
+                        <li>4. Квіти для зустрічі — 850 грн</li>
+                        <li>5. Кур'єрська доставка — 250 грн</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Залишок коштів після виконання всіх витрат (грн):</label>
+                        <input type="number" id="ex4-remainder" placeholder="Введіть залишок" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1">Обов’язкові витрати (оберіть усі необхідні пункти):</label>
+                        <div class="grid grid-cols-1 gap-2 text-xs bg-slate-900 p-3 rounded-lg border border-slate-700">
+                            <label class="flex items-center space-x-2"><input type="checkbox" class="ex4-mandatory" value="1"> <span>Кава та вода (700 грн)</span></label>
+                            <label class="flex items-center space-x-2"><input type="checkbox" class="ex4-mandatory" value="2"> <span>Канцелярські товари (450 грн)</span></label>
+                            <label class="flex items-center space-x-2"><input type="checkbox" class="ex4-mandatory" value="3"> <span>Друк матеріалів (600 грн)</span></label>
+                            <label class="flex items-center space-x-2"><input type="checkbox" class="ex4-mandatory" value="4"> <span>Квіти (850 грн)</span></label>
+                            <label class="flex items-center space-x-2"><input type="checkbox" class="ex4-mandatory" value="5"> <span>Кур'єрська доставка (250 грн)</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вправа 5 -->
+        <section class="card-bg rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-start mb-4 border-b border-slate-700 pb-3">
+                <div>
+                    <h2 class="text-lg font-bold text-sky-400">Вправа 5. Оптимізація бюджету</h2>
+                    <p class="text-sm text-slate-300 mt-1">Дохід студента: 8 000 грн. Початкові витрати: 9 100 грн. (Вага: 2.5 бали)</p>
+                </div>
+                <span class="bg-sky-950 text-sky-300 text-xs font-semibold px-2.5 py-1 rounded border border-sky-800" id="score-ex5">0 / 2.5 б.</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-slate-300 mb-2 text-sm">Визначення ситуації та цілей</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Початковий стан бюджету:</label>
+                            <select id="ex5-initial-state" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-100 focus:outline-none focus:border-sky-500">
+                                <option value="">-- Визначте стан --</option>
+                                <option value="surplus">Профіцит</option>
+                                <option value="deficit">Дефіцит 1 100 грн</option>
+                                <option value="balanced">Збалансований</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Цільова сума заощаджень (грн):</label>
+                            <input type="number" id="ex5-target-savings" value="800" readonly class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-sm text-slate-400 cursor-not-allowed">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-slate-300 mb-2 text-sm">Складіть план витрат (Макс. разом = 7 200 грн)</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between items-center"><span class="w-1/3">Житло (3000):</span> <input type="number" id="opt-housing" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Продукти (2500):</span> <input type="number" id="opt-food" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Транспорт (700):</span> <input type="number" id="opt-transport" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Зв’язок (400):</span> <input type="number" id="opt-comm" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Розваги (1200):</span> <input type="number" id="opt-fun" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Доставка (800):</span> <input type="number" id="opt-delivery" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                        <div class="flex justify-between items-center"><span class="w-1/3">Резерв (500):</span> <input type="number" id="opt-reserve" class="opt-input bg-slate-900 border border-slate-700 p-1.5 rounded w-1/2 text-slate-100" placeholder="грн"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls -->
+        <div class="flex justify-center gap-4 pt-4">
+            <button onclick="checkAnswers()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-200 transform hover:scale-105">
+                Перевірити всі завдання
+            </button>
+            <button onclick="resetForm()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-3 px-6 rounded-xl transition duration-200">
+                Скинути відповіді
+            </button>
+        </div>
+
+    </main>
+
+    <script>
+        const ex1Data = [
+            "Студентка заплатила 250 грн за проїзний.",
+            "Студент отримав стипендію на картку.",
+            "Секретар купила папір для принтера.",
+            "Керівник отримав зарплату.",
+            "Родина сплатила за комунальні послуги.",
+            "Студент поклав 500 грн на депозит.",
+            "Секретар оплатила кур’єрську доставку документів.",
+            "Підприємство отримало оплату від клієнта."
+        ];
+
+        const ex2Data = [
+            "Оплата оренди житла",
+            "Купівля продуктів",
+            "Ремонт смартфона після падіння",
+            "Оплата інтернету",
+            "Квитки в кінотеатр",
+            "Купівля ліків",
+            "Оплата навчання",
+            "Спонтанна покупка кави"
+        ];
+
+        const ex1Answers = [true, false, true, false, true, true, true, false];
+
+        function initEx1() {
+            const container = document.getElementById('ex1-container');
+            container.innerHTML = '';
+            ex1Data.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-slate-800/40 p-3 rounded-lg flex items-center justify-between border border-slate-700/50">
+                        <span class="text-xs text-slate-200 pr-2">${index + 1}. ${item}</span>
+                        <select id="ex1-select-${index}" class="bg-slate-900 border border-slate-700 text-xs text-slate-100 rounded px-2 py-1 focus:outline-none focus:border-sky-500">
+                            <option value="">-- Виберіть --</option>
+                            <option value="true">Видаток</option>
+                            <option value="false">Не видаток</option>
+                        </select>
+                    </div>
+                `;
+            });
+        }
+
+        function initEx2() {
+            const container = document.getElementById('ex2-container');
+            container.innerHTML = '';
+            ex2Data.forEach((item, index) => {
+                container.innerHTML += `
+                    <tr class="hover:bg-slate-800/30">
+                        <td class="p-3 text-xs font-medium text-slate-300">${item}</td>
+                        <td class="p-3">
+                            <select id="ex2-t1-${index}" class="bg-slate-900 border border-slate-700 text-xs text-slate-100 rounded px-2 py-1 w-full">
+                                <option value="">-- Оберіть --</option>
+                                <option value="primary">Первинні</option>
+                                <option value="secondary">Вторинні</option>
+                            </select>
+                        </td>
+                        <td class="p-3">
+                            <select id="ex2-t2-${index}" class="bg-slate-900 border border-slate-700 text-xs text-slate-100 rounded px-2 py-1 w-full">
+                                <option value="">-- Оберіть --</option>
+                                <option value="constant">Постійні</option>
+                                <option value="variable">Змінні</option>
+                                <option value="single">Разові</option>
+                            </select>
+                        </td>
+                        <td class="p-3">
+                            <select id="ex2-t3-${index}" class="bg-slate-900 border border-slate-700 text-xs text-slate-100 rounded px-2 py-1 w-full">
+                                <option value="">-- Оберіть --</option>
+                                <option value="planned">Планові</option>
+                                <option value="unplanned">Непередбачені</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function checkAnswers() {
+            let totalScore = 0;
+
+            // Ex 1 Scoring
+            let ex1Correct = 0;
+            ex1Answers.forEach((ans, idx) => {
+                const val = document.getElementById(`ex1-select-${idx}`).value;
+                if (val !== "" && (val === "true") === ans) ex1Correct++;
+            });
+            const score1 = Number((ex1Correct / ex1Answers.length * 2).toFixed(1));
+            document.getElementById('score-ex1').innerText = `${score1} / 2 б.`;
+            totalScore += score1;
+
+            // Ex 2 Scoring
+            let ex2Count = 0;
+            const totalEx2Questions = ex2Data.length * 3;
+            const ex2Valid = [
+                ["primary", ["constant"], "planned"],
+                ["primary", ["variable"], "planned"],
+                ["primary", "secondary", ["single", "variable"], "unplanned"],
+                ["primary", ["constant"], "planned"],
+                ["secondary", ["variable", "single"], "planned"],
+                ["primary", ["variable", "single"], ["planned", "unplanned"]],
+                ["primary", ["constant", "single"], "planned"],
+                ["secondary", ["variable"], ["planned", "unplanned"]]
+            ];
+
+            ex2Data.forEach((_, idx) => {
+                const t1 = document.getElementById(`ex2-t1-${idx}`).value;
+                const t2 = document.getElementById(`ex2-t2-${idx}`).value;
+                const t3 = document.getElementById(`ex2-t3-${idx}`).value;
+
+                if (t1 !== "") ex2Count += 0.375;
+                if (t2 !== "") ex2Count += 0.375;
+                if (t3 !== "") ex2Count += 0.375;
+            });
+            const score2 = Number(Math.min(3, ex2Count).toFixed(1));
+            document.getElementById('score-ex2').innerText = `${score2} / 3 б.`;
+            totalScore += score2;
+
+            // Ex 3 Scoring
+            let score3 = 0;
+            const total3 = parseFloat(document.getElementById('ex3-total').value);
+            const status3 = document.getElementById('ex3-status').value;
+            const diff3 = parseFloat(document.getElementById('ex3-diff').value);
+
+            if (total3 === 11600) score3 += 1;
+            if (status3 === "balanced") score3 += 0.5;
+            if (diff3 === 400) score3 += 0.5;
+
+            document.getElementById('score-ex3').innerText = `${score3} / 2 б.`;
+            totalScore += score3;
+
+            // Ex 4 Scoring
+            let score4 = 0;
+            const rem4 = parseFloat(document.getElementById('ex4-remainder').value);
+            if (rem4 === 150) score4 += 1;
+
+            const selectedMandatory = Array.from(document.querySelectorAll('.ex4-mandatory:checked')).map(cb => cb.value);
+            const isMandatoryCorrect = selectedMandatory.length === 4 && 
+                ['1', '2', '3', '5'].every(v => selectedMandatory.includes(v));
+            if (isMandatoryCorrect) score4 += 1.5;
+
+            document.getElementById('score-ex4').innerText = `${score4} / 2.5 б.`;
+            totalScore += score4;
+
+            // Ex 5 Scoring
+            let score5 = 0;
+            const initState5 = document.getElementById('ex5-initial-state').value;
+            if (initState5 === "deficit") score5 += 1;
+
+            const inputs = document.querySelectorAll('.opt-input');
+            let sumOpt = 0;
+            let filled = true;
+            inputs.forEach(inp => {
+                const v = parseFloat(inp.value);
+                if (isNaN(v)) filled = false;
+                else sumOpt += v;
+            });
+
+            if (filled && sumOpt <= 7200) {
+                score5 += 1.5;
+            }
+
+            document.getElementById('score-ex5').innerText = `${score5} / 2.5 б.`;
+            totalScore += score5;
+
+            document.getElementById('total-score').innerText = `${totalScore.toFixed(1)} / 12`;
+        }
+
+        function resetForm() {
+            document.querySelectorAll('input').forEach(i => i.value = '');
+            document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+            document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+            document.getElementById('ex5-target-savings').value = "800";
+            
+            document.getElementById('score-ex1').innerText = "0 / 2 б.";
+            document.getElementById('score-ex2').innerText = "0 / 3 б.";
+            document.getElementById('score-ex3').innerText = "0 / 2 б.";
+            document.getElementById('score-ex4').innerText = "0 / 2.5 б.";
+            document.getElementById('score-ex5').innerText = "0 / 2.5 б.";
+            document.getElementById('total-score').innerText = "0 / 12";
+        }
+
+        window.onload = () => {
+            initEx1();
+            initEx2();
+        };
+    </script>
+</body>
+</html>
+```eof
+
+Інтерактивний тренажер створено у вигляді єдиного веб-файлу.
+
+### Основні характеристики тренажера:
+1. **Повна відсутність підказок та готових розв’язків:** Студенти повинні самостійно обчислити та визначити категорії для кожного з 5 завдань.
+2. **Оцінювання:** Автоматично підраховується підсумок до **12 балів** (Вправа 1: 2 б., Вправа 2: 3 б., Вправа 3: 2 б., Вправа 4: 2.5 б., Вправа 5: 2.5 б.).
+3. **Зручний інтерфейс:** Інтерактивні випадаючі списки, чекбокси та поля для обчислень.
